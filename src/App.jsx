@@ -5,6 +5,7 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 import { useState } from "react";
 
+//default contactList
 const contactList = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
   { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
@@ -13,22 +14,30 @@ const contactList = [
 ];
 
 function App() {
+  //all contacts
   const [contacts, setContacts] = useState(() => contactList);
+  //search value input
   const [searchValue, setSearchValue] = useState("");
 
+  //filtered contacts which contain searchValue
   const filteredContacts = contacts.filter(({ name }) => {
     return name.toLowerCase().includes(searchValue.trim().toLowerCase());
   });
 
+  //handles searchValue state
   const handleChangeSearch = (e) => {
-    console.log(`e.target.value = ${e.target.value}`);
     setSearchValue(e.target.value);
+  };
+
+  //handles contacts state
+  const handleAddContact = (newContact) => {
+    setContacts((prevContacts) => [...prevContacts, newContact]);
   };
 
   return (
     <div className="main">
       <h1>Phonebook</h1>
-      <ContactForm />
+      <ContactForm onAddContact={handleAddContact} />
       <SearchBox value={searchValue} onChange={handleChangeSearch} />
       <ContactList contacts={filteredContacts} onChange={handleChangeSearch} />
     </div>

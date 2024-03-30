@@ -4,12 +4,13 @@ import { nanoid } from "nanoid";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 
-const FeedbackSchema = Yup.object().shape({
+const contactSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
   number: Yup.string()
+    .matches(/^\+?[ ()0-9-]+$/, "Invalid phone number")
     .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
@@ -20,12 +21,17 @@ const initialValues = {
   number: "",
 };
 
-export default function ContactForm() {
+export default function ContactForm({ onAddContact }) {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
+    const newContact = {
+      id: nanoid(),
+      name: values.name.trim(),
+      number: values.number.trim(),
+    };
+    onAddContact(newContact);
     actions.resetForm();
   };
 
@@ -33,7 +39,7 @@ export default function ContactForm() {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={FeedbackSchema}
+      validationSchema={contactSchema}
     >
       <Form className={css.form}>
         <div className={css.nameWrapper}>
