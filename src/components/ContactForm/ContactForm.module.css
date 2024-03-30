@@ -1,0 +1,36 @@
+.form {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px;
+  width: 256px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.nameWrapper {
+  width: 100%;
+}
+
+.numberWrapper {
+  width: 100%;
+}
+
+.label {
+  display: block;
+}
+
+.input {
+  width: 100%;
+}
+
+.error {
+  font-size: 0.8em;
+  color: #fa0000;
+}
+
+.btnSubmit {
+  width: fit-content;
+}
