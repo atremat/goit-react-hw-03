@@ -4,19 +4,12 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 import { useEffect, useState } from "react";
-
-//default contactList
-const contactList = [
-  { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-  { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-  { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-  { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-];
+import defaultContactList from "./data/contactList.json"; //default contactList
 
 function App() {
   //all contacts
   const [contacts, setContacts] = useState(() => {
-    //contactlist from localstorage
+    //download contactlist from localstorage
     const lS = window.localStorage.getItem("contacts");
     //if localstorage contains contactlist and contactlist is not empty then download from localstorage
     if (lS && JSON.parse(lS).length > 0) {
@@ -24,7 +17,7 @@ function App() {
     }
 
     //if localstorage does not exist or empty, download default
-    return contactList;
+    return defaultContactList;
   });
 
   //search value input
