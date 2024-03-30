@@ -3,6 +3,7 @@ import { useId } from "react";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
 import css from "./ContactForm.module.css";
+import { LuUserPlus } from "react-icons/lu";
 
 const contactSchema = Yup.object().shape({
   name: Yup.string()
@@ -69,6 +70,7 @@ export default function ContactForm({ onAddContact }) {
         </div>
 
         <button type="submit" className={css.btnSubmit}>
+          <LuUserPlus className={css.addIcon} />
           Add contact
         </button>
       </Form>

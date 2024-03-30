@@ -2,7 +2,7 @@
   border: 1px solid #000;
   border-radius: 5px;
   padding: 5px;
-  width: 256px;
+  width: 320px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,4 +34,8 @@
 
 .btnSubmit {
   width: fit-content;
+}
+
+.addIcon {
+  margin-right: 10px;
 }
