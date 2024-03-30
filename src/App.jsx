@@ -16,7 +16,7 @@ function App() {
   const [contacts, setContacts] = useState(() => contactList);
 
   return (
-    <div>
+    <div className="main">
       <h1>Phonebook</h1>
       <ContactForm />
       <SearchBox />
