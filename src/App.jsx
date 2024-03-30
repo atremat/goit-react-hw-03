@@ -3,7 +3,7 @@ import "./App.css";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //default contactList
 const contactList = [
@@ -15,7 +15,18 @@ const contactList = [
 
 function App() {
   //all contacts
-  const [contacts, setContacts] = useState(() => contactList);
+  const [contacts, setContacts] = useState(() => {
+    //contactlist from localstorage
+    const lS = window.localStorage.getItem("contacts");
+    //if localstorage contains contactlist and contactlist is not empty then download from localstorage
+    if (lS && JSON.parse(lS).length > 0) {
+      return JSON.parse(window.localStorage.getItem("contacts"));
+    }
+
+    //if localstorage does not exist or empty, download default
+    return contactList;
+  });
+
   //search value input
   const [searchValue, setSearchValue] = useState("");
 
@@ -23,6 +34,11 @@ function App() {
   const filteredContacts = contacts.filter(({ name }) => {
     return name.toLowerCase().includes(searchValue.trim().toLowerCase());
   });
+
+  //save to localstorage when contacts changed
+  useEffect(() => {
+    window.localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
   //handles searchValue state
   const handleChangeSearch = (e) => {
