@@ -34,12 +34,23 @@ function App() {
     setContacts((prevContacts) => [...prevContacts, newContact]);
   };
 
+  //handle delete contact from contacts
+  const handleDeleteContact = (id) => {
+    //filtered contacts without contact with id==id
+    const newContacts = contacts.filter((contact) => contact.id !== id);
+    setContacts(newContacts);
+  };
+
   return (
     <div className="main">
       <h1>Phonebook</h1>
       <ContactForm onAddContact={handleAddContact} />
       <SearchBox value={searchValue} onChange={handleChangeSearch} />
-      <ContactList contacts={filteredContacts} onChange={handleChangeSearch} />
+      <ContactList
+        contacts={filteredContacts}
+        onChange={handleChangeSearch}
+        onDelete={handleDeleteContact}
+      />
     </div>
   );
 }
