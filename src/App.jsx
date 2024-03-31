@@ -4,6 +4,7 @@ import { PiUserSquareFill } from "react-icons/pi";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
+import ContactEditForm from "./components/ContactEditForm/ContactEditForm";
 import { useEffect, useState } from "react";
 import defaultContactList from "./data/contactList.json"; //default contactList
 
@@ -23,6 +24,9 @@ function App() {
 
   //search value input
   const [searchValue, setSearchValue] = useState("");
+
+  //selected contact to edit
+  const [contactToEdit, setContactToEdit] = useState(null);
 
   //filtered contacts which contain searchValue
   const filteredContacts = contacts.filter(({ name }) => {
@@ -51,18 +55,47 @@ function App() {
     setContacts(newContacts);
   };
 
+  //handle edit existing contact
+  const handleEditContact = (contact) => {
+    setContactToEdit(contact);
+  };
+
+  //save edited contact
+  const handleSaveEditedContact = (editedContact) => {
+    const index = contacts.findIndex(
+      (contact) => contact.id === editedContact.id
+    );
+    const newContacts = contacts.toSpliced(index, 1, editedContact);
+    setContacts(newContacts);
+    handleCancel();
+  };
+
+  //handle cancel btn
+  const handleCancel = () => {
+    setContactToEdit(null);
+  };
+
   return (
     <div className="main">
       <h1 className="phonebook-header">
         <PiUserSquareFill className="phonebook-icon" />
         Phonebook
       </h1>
-      <ContactForm onAddContact={handleAddContact} />
+      {!contactToEdit ? (
+        <ContactForm onAddContact={handleAddContact} />
+      ) : (
+        <ContactEditForm
+          contactToEdit={contactToEdit}
+          onSaveEditedContact={handleSaveEditedContact}
+          onCancel={handleCancel}
+        />
+      )}
       <SearchBox value={searchValue} onChange={handleChangeSearch} />
       <ContactList
         contacts={filteredContacts}
         onChange={handleChangeSearch}
         onDelete={handleDeleteContact}
+        onEditContact={handleEditContact}
       />
     </div>
   );

@@ -22,17 +22,30 @@
   font-size: 1.2em;
 }
 
-.btnDelete {
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btnDelete,
+.btnEdit {
   border: 1px solid #adadad;
   border-radius: 4px;
-  height: 2em;
+  height: 1.5rem;
   white-space: nowrap;
+  text-align: left;
 }
 
 .btnDelete:hover {
   border: 1px solid #d20808;
 }
 
-.deleteIcon {
+.deleteIcon,
+.editIcon {
   margin-right: 10px;
+}
+
+.btnEdit:hover {
+  border: 1px solid #008cff;
 }

@@ -2,8 +2,14 @@ import { FaPhone } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import css from "./Contact.module.css";
 import { LuUserMinus } from "react-icons/lu";
+import { LiaUserEditSolid } from "react-icons/lia";
 
-export default function Contact({ id, name, number, onDelete }) {
+export default function Contact({ contact, onDelete, onEditContact }) {
+  const handleEdit = () => {
+    onEditContact(contact);
+  };
+
+  const { id, name, number } = contact;
   return (
     <li className={css.listItem}>
       <div className={css.leftWrapper}>
@@ -16,10 +22,16 @@ export default function Contact({ id, name, number, onDelete }) {
           <span className={css.number}>{number}</span>
         </div>
       </div>
-      <button className={css.btnDelete} onClick={() => onDelete(id)}>
-        <LuUserMinus className={css.deleteIcon} />
-        Delete
-      </button>
+      <div className={css.btnWrapper}>
+        <button className={css.btnDelete} onClick={() => onDelete(id)}>
+          <LuUserMinus className={css.deleteIcon} />
+          Delete
+        </button>
+        <button className={css.btnEdit} onClick={handleEdit}>
+          <LiaUserEditSolid className={css.editIcon} />
+          Edit
+        </button>
+      </div>
     </li>
   );
 }
