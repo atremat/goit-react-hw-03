@@ -4,7 +4,7 @@ import css from "./Contact.module.css";
 import { LuUserMinus } from "react-icons/lu";
 import { LiaUserEditSolid } from "react-icons/lia";
 
-export default function Contact({ contact, onDelete, onEditContact }) {
+const Contact = ({ contact, onDelete, onEditContact }) => {
   const handleEdit = () => {
     onEditContact(contact);
   };
@@ -34,4 +34,6 @@ export default function Contact({ contact, onDelete, onEditContact }) {
       </div>
     </li>
   );
-}
+};
+
+export default Contact;

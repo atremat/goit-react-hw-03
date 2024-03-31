@@ -8,7 +8,7 @@ import ContactEditForm from "./components/ContactEditForm/ContactEditForm";
 import { useEffect, useState } from "react";
 import defaultContactList from "./data/contactList.json"; //default contactList
 
-function App() {
+const App = () => {
   //all contacts
   const [contacts, setContacts] = useState(() => {
     //download contactlist from localstorage
@@ -81,14 +81,14 @@ function App() {
         <PiUserSquareFill className="phonebook-icon" />
         Phonebook
       </h1>
-      {!contactToEdit ? (
-        <ContactForm onAddContact={handleAddContact} />
-      ) : (
+      {contactToEdit ? (
         <ContactEditForm
           contactToEdit={contactToEdit}
           onSaveEditedContact={handleSaveEditedContact}
           onCancel={handleCancel}
         />
+      ) : (
+        <ContactForm onAddContact={handleAddContact} />
       )}
       <SearchBox value={searchValue} onChange={handleChangeSearch} />
       <ContactList
@@ -99,6 +99,6 @@ function App() {
       />
     </div>
   );
-}
+};
 
 export default App;

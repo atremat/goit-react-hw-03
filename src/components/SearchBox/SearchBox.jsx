@@ -2,7 +2,7 @@ import { useId } from "react";
 import css from "./SearchBox.module.css";
 import { TbUserSearch } from "react-icons/tb";
 
-export default function SearchBox({ value, onChange }) {
+const SearchBox = ({ value, onChange }) => {
   const searchValueId = useId();
 
   return (
@@ -20,4 +20,6 @@ export default function SearchBox({ value, onChange }) {
       />
     </div>
   );
-}
+};
+
+export default SearchBox;

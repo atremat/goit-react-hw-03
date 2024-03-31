@@ -17,11 +17,7 @@ const contactSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export default function ContactEditForm({
-  contactToEdit,
-  onSaveEditedContact,
-  onCancel,
-}) {
+const ContactEditForm = ({ contactToEdit, onSaveEditedContact, onCancel }) => {
   const nameFieldId = useId();
   const numberFieldId = useId();
 
@@ -87,4 +83,6 @@ export default function ContactEditForm({
       </Form>
     </Formik>
   );
-}
+};
+
+export default ContactEditForm;
